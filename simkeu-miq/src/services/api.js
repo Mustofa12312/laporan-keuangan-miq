@@ -8,12 +8,16 @@ export const isDemoMode = !GAS_URL
 const api = axios.create({
   baseURL: GAS_URL,
   timeout: 15000,
-  headers: { 'Content-Type': 'application/json' },
+  headers: { 'Content-Type': 'text/plain;charset=utf-8' },
 })
 
 // Request interceptor — tambahkan token
 api.interceptors.request.use(
   (config) => {
+    // Stringify data if it's an object to avoid preflight issues while keeping it readable for GAS
+    if (config.data && typeof config.data === 'object') {
+      config.data = JSON.stringify(config.data)
+    }
     const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
     if (token) {
       config.params = { ...config.params, token }
