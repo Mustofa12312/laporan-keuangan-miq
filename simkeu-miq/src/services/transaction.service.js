@@ -57,7 +57,7 @@ export const getTransactions = async (params = {}) => {
     const paginated = data.slice((page - 1) * limit, page * limit)
     return { data: paginated, total, page, limit }
   }
-  return api.get('', { params: { ...params, action: 'transactions' } })
+  return api.get(GAS_URL, { params: { ...params, action: 'transactions' } })
 }
 
 export const getTransaction = async (id) => {
@@ -66,7 +66,7 @@ export const getTransaction = async (id) => {
     if (!t) throw new Error('Transaksi tidak ditemukan')
     return { data: t }
   }
-  return api.get('', { params: { action: 'transaction', id } })
+  return api.get(GAS_URL, { params: { action: 'transaction', id } })
 }
 
 export const addTransaction = async (payload) => {
@@ -85,7 +85,7 @@ export const addTransaction = async (payload) => {
     addLog('Tambah', payload.kategori, null, newItem)
     return { success: true, message: 'Data berhasil disimpan', data: newItem }
   }
-  return api.post('', payload, { params: { action: 'addTransaction' } })
+  return api.post(GAS_URL, payload, { params: { action: 'addTransaction' } })
 }
 
 export const updateTransaction = async (id, payload) => {
@@ -103,7 +103,7 @@ export const updateTransaction = async (id, payload) => {
     addLog('Edit', payload.kategori, oldData, all[idx])
     return { success: true, message: 'Data berhasil diperbarui', data: all[idx] }
   }
-  return api.post('', payload, { params: { action: 'updateTransaction', id } })
+  return api.post(GAS_URL, payload, { params: { action: 'updateTransaction', id } })
 }
 
 export const deleteTransaction = async (id) => {
@@ -117,7 +117,7 @@ export const deleteTransaction = async (id) => {
     addLog('Hapus', old.kategori, old, null)
     return { success: true, message: 'Data berhasil dihapus' }
   }
-  return api.post('', null, { params: { action: 'deleteTransaction', id } })
+  return api.post(GAS_URL, null, { params: { action: 'deleteTransaction', id } })
 }
 
 // ===== REKAP =====
@@ -132,7 +132,7 @@ export const getRekap = async () => {
     rekap.grandTotal = Object.values(rekap).reduce((a, b) => a + b, 0)
     return { data: rekap }
   }
-  return api.get('', { params: { action: 'rekap' } })
+  return api.get(GAS_URL, { params: { action: 'rekap' } })
 }
 
 // ===== DASHBOARD =====
@@ -159,7 +159,7 @@ export const getDashboard = async () => {
       }
     }
   }
-  return api.get('', { params: { action: 'dashboard' } })
+  return api.get(GAS_URL, { params: { action: 'dashboard' } })
 }
 
 // ===== AUDIT LOG =====

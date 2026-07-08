@@ -1,5 +1,6 @@
 import api, { isDemoMode } from './api'
-import { STORAGE_KEYS } from '../constants'
+import { GAS_URL, STORAGE_KEYS } from '../constants'
+
 
 // ===== DEMO USERS =====
 const DEMO_USERS = [
@@ -24,7 +25,7 @@ export const login = async ({ username, password }) => {
     return { user, token }
   }
 
-  const res = await api.post('', { username, password }, { params: { action: 'login' } })
+  const res = await api.post(GAS_URL, { username, password }, { params: { action: 'login' } })
   saveSession(res.user, res.token)
   return res
 }

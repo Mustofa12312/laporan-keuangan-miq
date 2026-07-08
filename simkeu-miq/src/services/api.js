@@ -6,8 +6,7 @@ import toast from 'react-hot-toast'
 export const isDemoMode = !GAS_URL
 
 const api = axios.create({
-  baseURL: GAS_URL,
-  timeout: 15000,
+  timeout: 60000,
   headers: { 'Content-Type': 'text/plain;charset=utf-8' },
 })
 
