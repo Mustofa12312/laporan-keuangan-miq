@@ -32,7 +32,8 @@ api.interceptors.response.use(
     // GAS always returns 200; check success flag
     if (res.data && res.data.success === false) {
       if (res.data.message && res.data.message.includes('Session tidak valid')) {
-        localStorage.clear()
+        localStorage.removeItem('simkeu_token')
+        localStorage.removeItem('simkeu_user')
         window.location.href = '/login'
         return Promise.reject(new Error(res.data.message))
       }
@@ -46,7 +47,8 @@ api.interceptors.response.use(
     } else if (err.code === 'ECONNABORTED') {
       toast.error('Koneksi lambat, coba lagi')
     } else if (err.response?.status === 401) {
-      localStorage.clear()
+      localStorage.removeItem('simkeu_token')
+      localStorage.removeItem('simkeu_user')
       window.location.href = '/login'
     } else {
       toast.error(err.message || 'Gagal terhubung ke server')

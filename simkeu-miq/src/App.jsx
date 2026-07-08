@@ -16,6 +16,7 @@ const TransactionDetailPage = lazy(() => import('./pages/Transaction/Transaction
 const RekapPage           = lazy(() => import('./pages/Report/RekapPage'))
 const LaporanPage         = lazy(() => import('./pages/Report/LaporanPage'))
 const RiwayatPage         = lazy(() => import('./pages/Riwayat/RiwayatPage'))
+const PenggunaPage        = lazy(() => import('./pages/Pengguna/PenggunaPage'))
 const PengaturanPage      = lazy(() => import('./pages/Setting/PengaturanPage'))
 
 const PageLoader = () => (
@@ -57,6 +58,7 @@ export default function App() {
                   <Route path="rekapitulasi"          element={<RekapPage />} />
                   <Route path="laporan"               element={<LaporanPage />} />
                   <Route path="riwayat"               element={<RiwayatPage />} />
+                  <Route path="pengguna"              element={<PenggunaPage />} />
                   <Route path="pengaturan"            element={<PengaturanPage />} />
                 </Route>
 

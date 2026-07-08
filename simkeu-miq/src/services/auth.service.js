@@ -45,3 +45,11 @@ export const getSession = () => {
     return null
   }
 }
+
+export const getUsersList = async () => {
+  if (isDemoMode) {
+    return { data: DEMO_USERS.map(({ password, ...u }) => u) }
+  }
+  return api.get(GAS_URL, { params: { action: 'users' } })
+}
+

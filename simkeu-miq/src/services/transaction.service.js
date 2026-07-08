@@ -86,7 +86,9 @@ export const addTransaction = async (payload) => {
     addLog('Tambah', payload.kategori, null, newItem)
     return { success: true, message: 'Data berhasil disimpan', data: newItem }
   }
-  return api.post(GAS_URL, payload, { params: { action: 'addTransaction' } })
+  const res = await api.post(GAS_URL, payload, { params: { action: 'addTransaction' } })
+  addLog('Tambah', payload.kategori, null, payload)
+  return res
 }
 
 export const updateTransaction = async (id, payload) => {
@@ -104,7 +106,9 @@ export const updateTransaction = async (id, payload) => {
     addLog('Edit', payload.kategori, oldData, all[idx])
     return { success: true, message: 'Data berhasil diperbarui', data: all[idx] }
   }
-  return api.post(GAS_URL, payload, { params: { action: 'updateTransaction', id } })
+  const res = await api.post(GAS_URL, payload, { params: { action: 'updateTransaction', id } })
+  addLog('Edit', payload.kategori, null, payload)
+  return res
 }
 
 export const deleteTransaction = async (id) => {
@@ -118,7 +122,9 @@ export const deleteTransaction = async (id) => {
     addLog('Hapus', old.kategori, old, null)
     return { success: true, message: 'Data berhasil dihapus' }
   }
-  return api.post(GAS_URL, null, { params: { action: 'deleteTransaction', id } })
+  const res = await api.post(GAS_URL, null, { params: { action: 'deleteTransaction', id } })
+  addLog('Hapus', 'Semua Kategori', { id }, null)
+  return res
 }
 
 // ===== REKAP =====
@@ -168,7 +174,12 @@ const LOG_KEY = 'simkeu_logs'
 
 export const addLog = (aksi, kategori, dataLama, dataBaru) => {
   const user = JSON.parse(localStorage.getItem('simkeu_user') || '{}')
-  const logs = getLogs()
+  let logs = []
+  try {
+    logs = JSON.parse(localStorage.getItem(LOG_KEY) || '[]')
+  } catch (e) {
+    logs = []
+  }
   logs.unshift({
     id: generateId(),
     waktu: new Date().toISOString(),
