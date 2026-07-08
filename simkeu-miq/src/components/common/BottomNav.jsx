@@ -20,7 +20,7 @@ export const BottomNav = () => {
   const navigate = useNavigate()
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50
+    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50
                     bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg
                     border-t border-slate-200 dark:border-slate-700
                     flex items-center justify-around px-2

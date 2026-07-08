@@ -121,8 +121,8 @@ export default function TransactionListPage() {
     onError: (e) => toast.error(e.message),
   })
 
-  const transactions = data?.data || []
-  const total = data?.total || 0
+  const transactions = data?.data?.data || []
+  const total = data?.data?.total || 0
 
   return (
     <div className="space-y-4 animate-fade-in">

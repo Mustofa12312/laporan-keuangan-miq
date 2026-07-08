@@ -31,6 +31,11 @@ api.interceptors.response.use(
   (res) => {
     // GAS always returns 200; check success flag
     if (res.data && res.data.success === false) {
+      if (res.data.message && res.data.message.includes('Session tidak valid')) {
+        localStorage.clear()
+        window.location.href = '/login'
+        return Promise.reject(new Error(res.data.message))
+      }
       return Promise.reject(new Error(res.data.message || 'Terjadi kesalahan'))
     }
     return res.data
