@@ -26,8 +26,8 @@ export const login = async ({ username, password }) => {
   }
 
   const res = await api.post(GAS_URL, { username, password }, { params: { action: 'login' } })
-  saveSession(res.user, res.token)
-  return res
+  saveSession(res.data.user, res.data.token)
+  return res.data
 }
 
 export const logout = () => {
