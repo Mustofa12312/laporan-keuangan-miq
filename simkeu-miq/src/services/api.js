@@ -1,0 +1,50 @@
+import axios from 'axios'
+import { GAS_URL, STORAGE_KEYS } from '../constants'
+import toast from 'react-hot-toast'
+
+// Demo mode: gunakan data lokal jika GAS_URL tidak dikonfigurasi
+export const isDemoMode = !GAS_URL
+
+const api = axios.create({
+  baseURL: GAS_URL,
+  timeout: 15000,
+  headers: { 'Content-Type': 'application/json' },
+})
+
+// Request interceptor — tambahkan token
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem(STORAGE_KEYS.TOKEN)
+    if (token) {
+      config.params = { ...config.params, token }
+    }
+    return config
+  },
+  (err) => Promise.reject(err)
+)
+
+// Response interceptor — handle error global
+api.interceptors.response.use(
+  (res) => {
+    // GAS always returns 200; check success flag
+    if (res.data && res.data.success === false) {
+      return Promise.reject(new Error(res.data.message || 'Terjadi kesalahan'))
+    }
+    return res.data
+  },
+  (err) => {
+    if (!navigator.onLine) {
+      toast.error('Tidak ada koneksi internet')
+    } else if (err.code === 'ECONNABORTED') {
+      toast.error('Koneksi lambat, coba lagi')
+    } else if (err.response?.status === 401) {
+      localStorage.clear()
+      window.location.href = '/login'
+    } else {
+      toast.error(err.message || 'Gagal terhubung ke server')
+    }
+    return Promise.reject(err)
+  }
+)
+
+export default api
