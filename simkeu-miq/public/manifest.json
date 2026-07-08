@@ -1,0 +1,14 @@
+{
+  "name": "SIMKEU MIQ",
+  "short_name": "SIMKEU",
+  "description": "Sistem Informasi Manajemen Keuangan Kursus MIQ se-Madura",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#16a34a",
+  "background_color": "#0f172a",
+  "lang": "id",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable any" }
+  ]
+}
