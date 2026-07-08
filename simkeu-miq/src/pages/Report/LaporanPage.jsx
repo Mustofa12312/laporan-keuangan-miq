@@ -37,7 +37,7 @@ export default function LaporanPage() {
   const { data: txRes } = useQuery({
     queryKey: ['transactions', { limit: 9999 }],
     queryFn: () => getTransactions({ limit: 9999 }),
-    select: r => r.data || [],
+    select: r => r.data?.data || [],
   })
 
   const { data: rekapRes } = useQuery({

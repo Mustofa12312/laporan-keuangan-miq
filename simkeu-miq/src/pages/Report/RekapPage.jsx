@@ -19,7 +19,7 @@ export default function RekapPage() {
   const { data: txRes } = useQuery({
     queryKey: ['transactions', {}],
     queryFn: () => getTransactions({ limit: 9999 }),
-    select: r => r.data,
+    select: r => r.data?.data || [],
   })
 
   const grandTotal = rekapRes?.grandTotal || 0
