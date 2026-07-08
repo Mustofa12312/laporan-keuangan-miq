@@ -66,17 +66,17 @@ export default function LaporanPage() {
 
   return (
     <div className="space-y-5 animate-fade-in">
-      <h1 className="page-title">Laporan & Export</h1>
+      <h1 className="page-title no-print">Laporan & Export</h1>
 
       {/* Summary */}
-      <div className="card bg-gradient-to-br from-slate-800 to-slate-900 text-white">
+      <div className="card bg-gradient-to-br from-slate-800 to-slate-900 text-white no-print">
         <p className="text-xs text-slate-400 mb-1">Ringkasan Laporan</p>
         <p className="text-2xl font-extrabold">{formatRupiah(grandTotal)}</p>
         <p className="text-xs text-slate-400 mt-1">{totalTx} transaksi dari {CATEGORIES.length} kategori</p>
       </div>
 
       {/* Export options */}
-      <div className="space-y-3">
+      <div className="space-y-3 no-print">
         <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider px-1">
           Format Export
         </p>
@@ -110,7 +110,7 @@ export default function LaporanPage() {
       </div>
 
       {/* Print preview area */}
-      <div id="print-area" className="card no-print space-y-4">
+      <div id="print-area" className="card space-y-4 shadow-none border-0">
         <h2 className="text-sm font-semibold text-slate-700 dark:text-slate-300">Preview Rekapitulasi</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">

@@ -145,5 +145,7 @@
 @media print {
   .no-print { display: none !important; }
   body { background: white !important; color: black !important; }
+  aside, nav { display: none !important; }
+  main { padding: 0 !important; margin: 0 !important; }
   .print-page { page-break-after: always; }
 }

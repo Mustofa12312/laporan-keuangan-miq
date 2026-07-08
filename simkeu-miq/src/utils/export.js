@@ -1,5 +1,5 @@
 import jsPDF from 'jspdf'
-import 'jspdf-autotable'
+import autoTable from 'jspdf-autotable'
 import * as XLSX from 'xlsx'
 import { formatRupiah, formatDate } from './format'
 import { CATEGORIES } from '../constants'
@@ -30,7 +30,7 @@ export const exportToPDF = (transactions, rekap, orgName = 'Kursus MIQ se-Madura
   ])
   rekapRows.push(['GRAND TOTAL', formatRupiah(rekap.grandTotal || 0)])
 
-  doc.autoTable({
+  autoTable(doc, {
     startY: 50,
     head: [['Kategori', 'Subtotal']],
     body: rekapRows,
@@ -50,7 +50,7 @@ export const exportToPDF = (transactions, rekap, orgName = 'Kursus MIQ se-Madura
     doc.setFont('helvetica', 'bold')
     doc.text(cat.label, 14, 20)
 
-    doc.autoTable({
+    autoTable(doc, {
       startY: 25,
       head: [['Tgl', 'Uraian', 'Vol', 'Satuan', 'Harga Sat.', 'Jumlah', 'No. Nota']],
       body: rows.map(r => [
